@@ -1,30 +1,24 @@
 public class MetodosBusqueda {
-    
-
-    public int busquedaBinaria(int[] arr, int value) {
-        int inicio = 0;
-        int fin = arr.length - 1;
-        int cont = 0; // Inicializar el contador de iteraciones
-        long starttime = System.nanoTime();
+    public int busquedaBinaria(Persona[] personas, int edadBuscada) {
+        int bajo = 0;
+        int alto = personas.length - 1;
         
-        while (inicio <= fin) {
-            int medio = inicio + (fin - inicio) / 2;
-
-            if (arr[medio] == value) {
-                long endtime = System.nanoTime(); 
-                System.out.println("Tiempo de Ejecución: " + (endtime - starttime) + " nanosegundos");
-                // Elemento encontrado, mostrar el número de iteraciones
-                System.out.println("Se realizaron " + cont + " iteraciones");
-                return medio;
-            }
+        while (bajo <= alto) {
+            int centro = (bajo + alto) / 2;
+            int valorCentro = personas[centro].getEdad();
+            System.out.println("bajo=" + bajo + " alto=" + alto + " centro=" + centro + " valorCentro=" + valorCentro);
             
-            if (arr[medio] < value) {
-                inicio = medio + 1; // Buscar en la mitad derecha
+            if (valorCentro == edadBuscada) {
+                System.out.println("LA EDAD SE HA ENCONTRADO");
+                return centro;
+            } else if (valorCentro < edadBuscada) {
+                System.out.println("EL ARREGLO SEGUIRA HACIA LA DERECHA");
+                bajo = centro + 1;
             } else {
-                fin = medio - 1; // Buscar en la mitad izquierda
+                System.out.println("EL ARREGLO SEGUIRA HACIA LA IZQUIERDA");
+                alto = centro - 1;
             }
-            cont++; 
         }
-        return -1;
+        return -1; 
     }
 }
